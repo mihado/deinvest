@@ -36,6 +36,33 @@ const init = async () => {
     }
   });
 
+  server.route({
+    method: 'POST',
+    path: '/',
+    handler: async (request, h) => {
+      // TODO: validate payload;
+      // TODO: error handling;
+      // TODO: idempotency;
+      // TODO: handling proposal changed (versioning);
+
+      // console.log(request.payload);
+      const message = request.payload;
+      const address = message.address;
+      const cid = await ipfs.dag.put(message);
+
+      if (cid) {
+        await prisma.pin.create({
+          data: {
+            address: address,
+            ipfsHash: cid.toString()
+          }
+        })
+      }
+
+      return cid.toString();
+    }
+  });
+
   await server.start();
   console.log('Server running on %s', server.info.uri);
 };

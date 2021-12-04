@@ -18,7 +18,11 @@
   "homepage": "https://github.com/mihado/deinvest#readme",
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
+    "@prisma/client": "^3.6.0",
     "cids": "^1.1.9",
     "ipfs-core": "^0.12.2"
+  },
+  "devDependencies": {
+    "prisma": "^3.6.0"
   }
 }

@@ -4,6 +4,9 @@ const Hapi = require('@hapi/hapi');
 const IPFS = require('ipfs-core');
 const CID  = require('cids');
 
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
 const init = async () => {
 
   const ipfs = await IPFS.create();
@@ -17,11 +20,19 @@ const init = async () => {
     method: 'GET',
     path: '/',
     handler: async (request, h) => {
-      // const cid = await ipfs.dag.put({ message: 'Hello World!' });
-      const cid = new CID('bafyreibe62fzsplsvsvhltnyu6mo4o6u2hfaf5wjb3zjqhkfxga7wbmzca');
-      const pin = await ipfs.dag.get(cid, { path: '/message' } );
-      // Hello World!
-      return pin.value;
+      const pins = [];
+      const cachedPins = await prisma.pin.findMany();
+
+      // console.log(cachedPins);
+
+      for (var cachedPin of cachedPins) {
+        let pin = await ipfs.dag.get(new CID(cachedPin.ipfsHash), { path: "/" });
+        pins.push(pin);
+      }
+
+      // console.log(pins);
+
+      return pins;
     }
   });
 

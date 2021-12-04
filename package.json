@@ -1,0 +1,23 @@
+{
+  "name": "deinvest",
+  "version": "1.0.0",
+  "description": "https://docs.google.com/document/d/1cK3NOXlwHbndNn7BKz8w4lD67JlRr6mVDnMu5_UBLfY/edit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihado/deinvest.git"
+  },
+  "author": "mihado@minh.im",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mihado/deinvest/issues"
+  },
+  "homepage": "https://github.com/mihado/deinvest#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1",
+    "ipfs-core": "^0.12.2"
+  }
+}
